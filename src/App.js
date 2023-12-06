@@ -1,58 +1,92 @@
 import React from "react";
+import axios from "axios";
 import Card from "./components/Card";
 import Drawer from "./components/Drawer.jsx";
 import Header from "./components/Header.jsx";
 
-const arr=[
-  {
-    title:'Apple iPhone 15 Plus 128GB',
-    price: 99999,
-    imageUrl: './img/phones/iPhone15Plus.png'
-  },
-  {
-    title:'Apple iPhone 15 Pro 512GB',
-    price: 159999,
-    imageUrl: './img/phones/iPhone15Pro.png'
-  },
-  {
-    title:'Nothing Phone 2 256GB',
-    price: 59999,
-    imageUrl: './img/phones/NothingPhone2.png'
-  },
-  {
-    title:'Samsung S23 Ultra 512GB',
-    price: 119999,
-    imageUrl: './img/phones/SamsungS23Ultra.png'
-  },
-  {
-    title:'',
-    price: 119999,
-    imageUrl: './img/phones/SamsungS23Ultra.png'
-  },
-];
+const itemsUrl = 'http://localhost:3001/items';
+const cartUrl = 'http://localhost:3001/cart';
+
 
 export default function App() {
+  const [items,setItems]= React.useState([]);
+  const [cartItems,setCartItems]= React.useState([]);
+  const [searchValue,setSearchValue]= React.useState('');
   const [cartOpened, setCartOpened]=React.useState(false);
 
+ React.useEffect(()=>{
+   axios.get(itemsUrl).then(res => {
+     setItems(res.data);
+   });
+   axios.get(cartUrl).then(res => {
+     setCartItems(res.data);
+   });
+ },[]);
 
+  const onAddToCart = (obj) => {
+    const itemInCart = cartItems.find(item => item.id === obj.id);
+    if (itemInCart) {
+      return;
+    }
+
+    axios.post(cartUrl, obj);
+    setCartItems((prev) => [...prev, obj]);
+  };
+
+  const onRemoveItem = (id) => {
+    axios.delete(`${cartUrl}/${id}`)
+    .then(() => {
+      setCartItems((prev) => prev.filter(item => item.id !== id));
+    })
+    .catch((error) => {
+      console.error('Error deleting item from cart:', error);
+    });
+  };
+
+ const onChangeSearchInput=(event)=>{
+   setSearchValue(event.target.value);
+ }
 
   return (
     <div className="wrapper clear">
-      {cartOpened && <Drawer onClose={()=>setCartOpened(false)}/>}
+      {cartOpened &&
+      <Drawer
+        items={cartItems}
+        onClose={()=>setCartOpened(false)}
+        onRemove={onRemoveItem}
+      />}
       <Header onClickCart={()=>setCartOpened(true)}/>
       <div className="content p-40">
         <div className="d-flex aling-center justify-between mb-40">
-          <h1>Все смартфоны</h1>
+          <h1>{searchValue ? `Поиск по запросу: "${searchValue}" ` : 'Все смартфоны'}</h1>
           <div className="search-block d-flex">
             <img src="./img/Search.svg" alt="Search"/>
-            <input placeholder="Поиск..."/>
+            {searchValue && (
+              <img
+                onClick={()=>setSearchValue('')}
+                className="clear cu-p"
+                src="./img/btn-remove.svg"
+                alt="Clear"/>
+                )}
+            <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..."/>
           </div>
         </div>
-        <div className="d-flex">
-          {arr.map((obj)=>(
-            <Card title={obj.title} price={obj.price} imageUrl={obj.imageUrl} />
+        <div className="d-flex flex-wrap">
+          {items
+            .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+            .map((item, index) => (
+              <Card
+                key={index}
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                imageUrl={item.imageUrl}
+                onFavorite={() => console.log('Добавили в закладки')}
+                onPlus={(obj) => onAddToCart(obj)}
+                onRemove={(id) => onRemoveItem(id)}
+                cartItems={cartItems}
+              />
           ))}
-          {/* <Card title="Apple iPhone 15 Pro 512Gb" price={159999} imageUrl="./img/phones/iPhone15Pro.jpg"/> */}
         </div>
       </div>
     </div>

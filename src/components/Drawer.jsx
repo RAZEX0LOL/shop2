@@ -1,37 +1,35 @@
-export default function Drawer(props){
+import "./../index.scss";
+
+export default function Drawer({onClose, onRemove,items=[]}){
     return(
         <div className="overlay">
         <div className="drawer"> 
           <h2 className="d-flex justify-between mb-30">
-            Корзина <img onClick={props.onClose} className="cu-p" src="./img/btn-remove.svg" alt="Close"/>
+            Корзина <img onClick={onClose} className="cu-p" src="./img/btn-remove.svg" alt="Close"/>
           </h2>
 
+          <div className={"cartEmpty d-dflex align-center justify-center flex-column flex"}>
+            <img className="mb-20" width={"120px"} height={"120px"} src={"./img/empty-cart.svg"}/>
+            <h2>Корзина пустая</h2>
+            <p className={"opacity-6"}>Добавьте хотя бы один товар, чтобы сделать заказ</p>
+            <button className={"blueButton"}>
+              <img src={"./img/arrow.svg"} alt={"Arrow"}/> Вернуться назад
+            </button>
+          </div>
+
           <div className="items">
-          <div className="cartItem d-flex align-center mb-20">
-            {/* <img className="mr-20" width={70} height={70} src="./img/phones/iPhone15Plus.png" alt="iPhone15Plus"/> */}
-            <div style={{backgroundImage: 'url(./img/phones/iPhone15Plus.png)'}} className="cartItemImg"></div>
-
-
-            <div className="mr-20 flex">
-              <p className="mb-5">Apple iPhone 15 Plus 128Gb</p>
-              <b>99 999 руб.</b>
-            </div>
-            <img className="removeBtn" src="./img/btn-remove.svg" alt="Remove"/>
-
-          </div>
-          <div className="cartItem d-flex align-center mb-20">
-            {/* <img className="mr-20" width={70} height={70} src="./img/phones/iPhone15Plus.png" alt="iPhone15Plus"/> */}
-            <div style={{backgroundImage: 'url(./img/phones/iPhone15Plus.png)'}} className="cartItemImg"></div>
-
-
-            <div className="mr-20 flex">
-              <p className="mb-5">Apple iPhone 15 Plus 128Gb</p>
-              <b>99 999 руб.</b>
-            </div>
-            <img className="removeBtn" src="./img/btn-remove.svg" alt="Remove"/>
-
-          </div>
-          
+            {
+              items.map((obj)=>(
+                <div className="cartItem d-flex align-center mb-20">
+                  <div style={{backgroundImage: `url(${obj.imageUrl})`}} className="cartItemImg"></div>
+                  <div className="mr-20 flex">
+                    <p className="mb-5">{obj.title}</p>
+                    <b>{obj.price} руб.</b>
+                  </div>
+                  <img onClick={()=>onRemove(obj.id)} className="removeBtn" src="./img/btn-remove.svg" alt="Remove"/>
+                </div>
+              ))
+            }
           </div>
 
           <div className="cartTotalBlock">
