@@ -6,11 +6,13 @@ import Header from "./components/Header.jsx";
 
 const itemsUrl = 'http://localhost:3001/items';
 const cartUrl = 'http://localhost:3001/cart';
+const favoriteUrl='http://localhost:3001/favorites';
 
 
 export default function App() {
   const [items,setItems]= React.useState([]);
   const [cartItems,setCartItems]= React.useState([]);
+  const [favorites,setFavorites] = React.useState([]);
   const [searchValue,setSearchValue]= React.useState('');
   const [cartOpened, setCartOpened]=React.useState(false);
 
@@ -42,12 +44,23 @@ export default function App() {
       console.error('Error deleting item from cart:', error);
     });
   };
+  const onAddToFavorite = (obj) => {
+    const itemInFavorite = favorites.find(item => item.id === obj.id);
+    if (itemInFavorite) {
+      return;
+    }
+
+    axios.post(favoriteUrl, obj);
+    setFavorites((prev) => [...prev, obj]);
+  };
 
  const onChangeSearchInput=(event)=>{
    setSearchValue(event.target.value);
  }
 
-  return (
+
+
+return (
     <div className="wrapper clear">
       {cartOpened &&
       <Drawer
@@ -81,7 +94,7 @@ export default function App() {
                 title={item.title}
                 price={item.price}
                 imageUrl={item.imageUrl}
-                onFavorite={() => console.log('Добавили в закладки')}
+                onFavorite={(obj) => onAddToFavorite(obj)}
                 onPlus={(obj) => onAddToCart(obj)}
                 onRemove={(id) => onRemoveItem(id)}
                 cartItems={cartItems}
