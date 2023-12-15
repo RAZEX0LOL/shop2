@@ -1,81 +1,73 @@
 {
   "items": [
     {
+      "id": 1,
       "title": "Apple iPhone 15 Plus 128GB",
       "price": 99999,
       "imageUrl": "./img/phones/iPhone15Plus.png"
     },
     {
+      "id": 2,
       "title": "Apple iPhone 15 Pro 512GB",
       "price": 159999,
       "imageUrl": "./img/phones/iPhone15Pro.png"
     },
     {
+      "id": 3,
       "title": "Nothing Phone 2 256GB",
       "price": 59999,
       "imageUrl": "./img/phones/NothingPhone2.png"
     },
     {
+      "id": 4,
       "title": "Samsung S23 Ultra 512GB",
       "price": 119999,
       "imageUrl": "./img/phones/SamsungS23Ultra.png"
     },
     {
+      "id": 5,
       "title": "Asus ROG Phone 7 Ultimate 256GB",
       "price": 131999,
       "imageUrl": "./img/phones/AsusRogPhone7Ultimate.webp"
     },
     {
+      "id": 6,
       "title": "iPhone 15 Pro Max Caviar 1TB",
       "price": 799999,
       "imageUrl": "./img/phones/iPhone15ProMaxCaviar.png"
     },
     {
+      "id": 7,
       "title": "Samsung Z Flip 5 Caviar 1TB",
       "price": 599999,
       "imageUrl": "./img/phones/SamsungZFlip5Caviar.png"
     },
     {
+      "id": 8,
       "title": "Samsung Z Fold 3 Caviar 1TB",
       "price": 399999,
       "imageUrl": "./img/phones/SamsungZFold3Caviar.png"
     },
     {
+      "id": 9,
       "title": "Samsung Z Fold 5 256GB",
       "price": 179999,
       "imageUrl": "./img/phones/SamsungZFold5.webp"
     },
     {
+      "id": 10,
       "title": "Sony Xperia 1 128GB",
       "price": 121999,
       "imageUrl": "./img/phones/SonyXPeria1.webp"
     }
   ],
-  "cart": [
+  "cart": [],
+  "favorites": [
     {
+      "id": 1,
       "title": "Apple iPhone 15 Plus 128GB",
       "imageUrl": "./img/phones/iPhone15Plus.png",
-      "price": 99999,
-      "id": 1
-    },
-    {
-      "title": "Apple iPhone 15 Plus 128GB",
-      "imageUrl": "./img/phones/iPhone15Plus.png",
-      "price": 99999,
-      "id": 2
-    },
-    {
-      "title": "Apple iPhone 15 Plus 128GB",
-      "imageUrl": "./img/phones/iPhone15Plus.png",
-      "price": 99999,
-      "id": 3
-    },
-    {
-      "title": "Apple iPhone 15 Plus 128GB",
-      "imageUrl": "./img/phones/iPhone15Plus.png",
-      "price": 99999,
-      "id": 4
+      "price": 99999
     }
-  ],
-  "favorites": []
+  ]
 }

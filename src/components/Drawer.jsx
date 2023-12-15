@@ -7,7 +7,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
         </h2>
         {items.length > 0 ? (
           <div>
-            <div className="items">
+            <div className="items" style={{ maxHeight: '500px', overflowY: 'auto' }}>
               {items.map((obj) => (
                 <div key={obj.id} className="cartItem d-flex align-center mb-20">
                   <div

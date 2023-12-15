@@ -14,15 +14,27 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect( () => {
-  async function fetchData(){
-    const cartResponse=await axios.get('http://localhost:3001/cart');
-    const favoritesResponse=await axios.get('http://localhost:3001/favorites');
-    const itemsResponse=await axios.get('http://localhost:3001/items');
+//  async function fetchData(){
+//    const cartResponse=await axios.get('http://localhost:3001/cart');
+//    const favoritesResponse=await axios.get('http://localhost:3001/favorites');
+//    const itemsResponse=await axios.get('http://localhost:3001/items');
+//
+//    setCartItems(cartResponse.data);
+//    setFavorites(favoritesResponse.data);
+//    setItems(itemsResponse.data);
+//  }
 
-    setCartItems(cartResponse.data);
-    setFavorites(favoritesResponse.data);
-    setItems(itemsResponse.data);
-  }
+    // Обновите эти строки в компоненте App
+    async function fetchData() {
+      const cartResponse = await axios.get('http://localhost:3001/cart');
+      const favoritesResponse = await axios.get('http://localhost:3001/favorites');
+      const itemsResponse = await axios.get('http://localhost:3001/items');
+
+      setCartItems(cartResponse.data);
+      setFavorites(favoritesResponse.data);
+      setItems(itemsResponse.data);
+    }
+
     fetchData();
   }, []);
 
