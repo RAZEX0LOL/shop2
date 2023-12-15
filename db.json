@@ -62,12 +62,5 @@
     }
   ],
   "cart": [],
-  "favorites": [
-    {
-      "id": 1,
-      "title": "Apple iPhone 15 Plus 128GB",
-      "imageUrl": "./img/phones/iPhone15Plus.png",
-      "price": 99999
-    }
-  ]
+  "favorites": []
 }
