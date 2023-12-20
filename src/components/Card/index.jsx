@@ -43,7 +43,7 @@ function Card({
           <rect x="124" y="230" rx="10" ry="10" width="32" height="32" />
     </ContentLoader> : <>
     <div className={styles.favorite} onClick={onClickFavorite}>
-      <img src={isFavorite ? 'img/heart-like.svg' : 'img/heart-unlike.svg'} alt="Unliked" />
+      <img src={isFavorite ? '/img/heart-like.svg' : '/img/heart-unlike.svg'} alt="Unliked" />
     </div>
     <img width={133} height={112} src={imageUrl} className={"ml-20"} alt="Phones" />
     <h5>{title}</h5>
@@ -55,7 +55,7 @@ function Card({
       <img
         className={styles.plus}
         onClick={onClickPlus}
-        src={isItemAdded(id) ? 'img/btn-checked.svg' : 'img/btn-plus.svg'}
+        src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'}
         alt="Plus"
       />
     </div></>
