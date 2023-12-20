@@ -25,9 +25,9 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "json-server": "json-server --watch db.json --port 3001",
-    "dev": "concurrently \"npm start\" \"npm run json-server\"",
+    "start": "concurrently \"npm dev\" \"npm run json-server\"",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
