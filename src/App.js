@@ -19,16 +19,21 @@ function App() {
 
   React.useEffect( () => {
     async function fetchData() {
-      setIsLoading(true);
-      const cartResponse = await axios.get('http://localhost:3001/cart');
-      const favoritesResponse = await axios.get('http://localhost:3001/favorites');
-      const itemsResponse = await axios.get('http://localhost:3001/items');
+      try {
+        setIsLoading(true);
+        const cartResponse = await axios.get('http://localhost:3001/cart');
+        const favoritesResponse = await axios.get('http://localhost:3001/favorites');
+        const itemsResponse = await axios.get('http://localhost:3001/items');
 
-      setIsLoading(false);
+        setIsLoading(false);
 
-      setCartItems(cartResponse.data);
-      setFavorites(favoritesResponse.data);
-      setItems(itemsResponse.data);
+        setCartItems(cartResponse.data);
+        setFavorites(favoritesResponse.data);
+        setItems(itemsResponse.data);
+      }catch (error){
+        alert("Ошибка при загрузке данных! Повторите пыпытку позже");
+        console.log(error);
+      }
     }
 
     fetchData();
@@ -72,11 +77,9 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={{items, cartItems,favorites, isItemAdded, onAddToFavorite, setCartOpened, setCartItems}}>
+    <AppContext.Provider value={{items, cartItems,favorites, isItemAdded, onAddToFavorite, setCartOpened, setCartItems,onAddToCart}}>
       <div className="wrapper clear">
-        {cartOpened && (
-          <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} />
-          )}
+        <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} opened={cartOpened}/>
         <Header onClickCart={() => setCartOpened(true)} />
         <Routes>
           <Route path="/" element={<Home
