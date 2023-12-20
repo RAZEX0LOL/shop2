@@ -62,5 +62,41 @@
     }
   ],
   "cart": [],
-  "favorites": []
+  "favorites": [],
+  "orders": [
+    {
+      "productIds": [
+        8,
+        7,
+        1
+      ],
+      "id": 1
+    },
+    {
+      "productIds": [
+        4
+      ],
+      "id": 2
+    },
+    {
+      "productIds": [
+        1,
+        2
+      ],
+      "id": 3
+    },
+    {
+      "productIds": [
+        1
+      ],
+      "id": 4
+    },
+    {
+      "productIds": [
+        4,
+        3
+      ],
+      "id": 5
+    }
+  ]
 }
